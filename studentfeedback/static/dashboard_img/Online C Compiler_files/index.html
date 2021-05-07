@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<!-- saved from url=(0080)https://s0.2mdn.net/9340650/5570805463410743/Behind_the_Shield_728x90/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="ad.size" content="width=728,height=90">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<title>Behind_the_Shield_728x90</title>
+	<script type="text/javascript" src="./gsap_3.0.1_min.js.download"></script><!-- GSAP 3.0 -->
+	<script type="text/javascript">var clickTag = "https://www.ibm.com";</script>
+	<style>
+		body,html{
+			color: #000000;
+			border:0 none;
+			outline:0;
+			overflow:hidden;
+			padding:0;
+			margin:0; 
+		}
+		div {
+			margin:0;
+			padding:0; 
+		}
+		#container div, svg, img{
+			position:absolute;
+			display:block;
+		}
+		.border {
+			border:1px solid #000;
+			box-sizing:border-box;
+			-moz-box-sizing:border-box;
+			-webkit-box-sizing:border-box;
+		}
+		.clickable { cursor:pointer }
+		.full-size{
+			top:0;
+			left:0;
+			width:728px;
+			height:90px;
+		}
+		div#container{
+			background-color: white;
+			visibility: hidden;
+			position:relative;
+			overflow: hidden;
+		}
+		.bg{
+			top:0;
+			left:315px;
+			width:250px;
+			height:90px;
+		}
+		
+		/* Logos */
+		
+		#ibm-logo{
+			bottom: 16px;
+			right:10px;
+		}
+		#security-logo{
+			bottom: 16px;
+			left:16px;
+		}
+		
+		/* cta */
+		
+		#cta{
+			left: 104px;
+			top: 63px;
+			width: 100%;
+			height: auto;
+			vertical-align: top;
+		}
+		#cta #cta-txt, #cta #cta-arrow{
+			position: relative;
+			display: inline-block;
+			vertical-align: top;
+		}
+		#cta-txt{
+			padding-right: 8px;
+		}
+		
+		/* Txt */
+		
+		.txt{
+			left: 104px;
+			width: 100%;
+			height: 22px;
+		}
+		
+		.line-mask{
+			width: 100%;
+			height:22px;
+			left: 0;
+			overflow:hidden;
+			/*background-color: rgba(255,0,0,0.1);*/
+		}
+		
+		.line1-mask{top: 16px}
+		.line2-mask{top: 38px}
+		.line3-mask{top: 60px}
+		
+		.t1 {
+			background: url(images/t1.png) no-repeat;
+			background-size: 151px 43px;
+		}
+		.t2 {
+			background: url(images/t2.png) no-repeat;
+			background-size: 191px 60px;
+		}
+		.t3 {
+			background: url(images/t3.png) no-repeat;
+			background-size: 167px 38px;
+		}
+		
+		.t1#t1-line2, .t2#t2-line2, .t3#t3-line2{
+			background-position: 0px -22px;
+		}
+		.t2#t2-line3{
+			background-position: 0px -44px;
+		}
+		
+		.sprite{
+			background-image: url(images/spritesheet_2x.png);
+			background-size: 250px 396px;
+			background-repeat: no-repeat;
+		}
+		.sprite#bg1 {
+			background-position: 0px -124px;
+			width: 250px;
+			height: 90px;
+		}
+		.sprite#bg2 {
+			background-position: 0px -215px;
+			width: 250px;
+			height: 90px;
+		}
+		.sprite#bg3 {
+			background-position: 0px -306px;
+			width: 250px;
+			height: 90px;
+		}
+		.sprite#cta-arrow {
+			background-position: 0px 0px;
+			width: 18px;
+			height: 14px;
+		}
+		.sprite#cta-txt {
+			background-position: 0px -15px;
+			width: 53px;
+			height: 16px;
+		}
+		.sprite#ibm-logo {
+			background-position: 0px -31px;
+			width: 86px;
+			height: 33px;
+		}
+		.sprite#security-logo {
+			background-position: 0px -65px;
+			width: 43px;
+			height: 58px;
+		}
+	</style>
+<script type="text/javascript">
+    
+  (function() {
+    var MAX_URL_PARAM_LENGTH = 34;
+    var CLICK_X_URL_KEY = 'nx';
+    var CLICK_Y_URL_KEY = 'ny';
+    var CREATIVE_DIMENSIONS_KEY = 'dim';
+    var AD_URL_PARAM = '&adurl=';
+
+    var relegateNavigation = '';
+    var urlParamMap = {};
+
+    urlParamMap[CLICK_X_URL_KEY] = null;
+    urlParamMap[CLICK_Y_URL_KEY] = null;
+    urlParamMap[CREATIVE_DIMENSIONS_KEY] = null;
+
+    var handleClickTagMessage = function(e) {
+      try {
+        var eventData = JSON.parse(e.data);
+      } catch (err) {
+        return;
+      }
+      if (eventData.isInitClickTag) {
+        if (eventData.clickTags) {
+          for (var i = 0; i < eventData.clickTags.length; i++) {
+            var clkTag = eventData.clickTags[i];
+            window[clkTag.name] = clkTag.url;
+          }
+        } else if (eventData.clickTag) {
+          window.clickTag = eventData.clickTag;
+        }
+        relegateNavigation = eventData.relegateNavigation;
+      }
+    };
+
+    var storeClickCoordinates = function(e) {
+      urlParamMap[CLICK_X_URL_KEY] = Math.round(e.clientX);
+      urlParamMap[CLICK_Y_URL_KEY] = Math.round(e.clientY);
+    };
+
+    var getCreativeDimensions = function() {
+      return window.innerWidth + 'x' + window.innerHeight;
+    }
+
+    var getExitClickParams = function(e) {
+      urlParamMap[CREATIVE_DIMENSIONS_KEY] = getCreativeDimensions();
+
+      var exitParams = '';
+      for (var key in urlParamMap) {
+        exitParams += '&' + key + '=';
+        if (urlParamMap[key] !== null) {
+          exitParams += urlParamMap[key];
+        }
+      }
+      return exitParams;
+    }
+
+    var appendExitClickParams = function(url) {
+      var adUrlIndex = url.toLowerCase().indexOf(AD_URL_PARAM);
+      var paramsToBeAdded = getExitClickParams();
+      if (adUrlIndex > -1 && paramsToBeAdded.length <= MAX_URL_PARAM_LENGTH) {
+        url = url.substr(0, adUrlIndex) + paramsToBeAdded +
+          url.substr(adUrlIndex);
+      };
+      return url;
+    };
+
+    if (open.call) {
+      window.open = function(open) {
+        return function(url, name, features) {
+          url = appendExitClickParams(url);
+          if (relegateNavigation === 'parent') {
+            var message = {'clickTag': url, 'isPostClickTag': true};
+            parent.postMessage(JSON.stringify(message), '*');
+          } else {
+            var args = [url, name];
+            if (features) {
+              args.push(features);
+            }
+            open.apply(window, args);
+          }
+        };
+      }(window.open);
+    }
+
+    if (window.addEventListener) {
+      window.addEventListener(
+          'message', handleClickTagMessage, false);
+      window.addEventListener('mousedown', storeClickCoordinates, true);
+    } else {
+      window.attachEvent('onmessage', handleClickTagMessage);
+    }
+  })();
+    
+  </script></head>
+
+<body>
+	<div id="container" class="full-size" style="opacity: 1; visibility: inherit;">
+		<div id="bg1" class="bg sprite"></div>
+		<div id="bg2" class="bg sprite" style="opacity: 1; visibility: inherit;"></div>
+		<div id="bg3" class="bg sprite" style="opacity: 1; visibility: inherit;"></div>
+		<div id="t1-mask1" class="line-mask line1-mask">
+			<div id="t1-line1" class="t1 txt" style="transform: translate(0px, 50px); opacity: 0; visibility: hidden;"></div>
+		</div>
+		<div id="t1-mask2" class="line-mask line2-mask">
+			<div id="t1-line2" class="t1 txt" style="transform: translate(0px, 50px); opacity: 0; visibility: hidden;"></div>
+		</div>
+		<div id="t2-mask1" class="line-mask line1-mask">
+			<div id="t2-line1" class="t2 txt" style="transform: translate(0px, 50px); opacity: 0; visibility: hidden;"></div>
+		</div>
+		<div id="t2-mask2" class="line-mask line2-mask">
+			<div id="t2-line2" class="t2 txt" style="transform: translate(0px, 50px); opacity: 0; visibility: hidden;"></div>
+		</div>
+		<div id="t2-mask3" class="line-mask line3-mask">
+			<div id="t2-line3" class="t2 txt" style="transform: translate(0px, 50px); opacity: 0; visibility: hidden;"></div>
+		</div>
+		<div id="t3-mask1" class="line-mask line1-mask">
+			<div id="t3-line1" class="t3 txt" style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"></div>
+		</div>
+		<div id="t3-mask2" class="line-mask line2-mask">
+			<div id="t3-line2" class="t3 txt" style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"></div>
+		</div>
+		
+		<div id="cta" style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;">
+			<div id="cta-txt" class="sprite"></div><div id="cta-arrow" class="sprite" style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"></div>
+		</div>
+		<div id="ibm-logo" class="sprite"></div>
+		<div id="security-logo" class="sprite"></div>
+		<div class="border full-size"></div>
+		<div id="clicker" class="clickable full-size"></div>
+	</div>
+	<script type="text/javascript">
+		(function(window, document){
+			var container, ctaArrow, clicker, tl;
+			
+			function clickOut() {window.open(window.clickTag);}
+			
+			function init() {
+				clicker = document.getElementById('clicker');
+				container = document.getElementById('container');
+				ctaArrow = document.getElementById('cta-arrow');
+				clicker.addEventListener('click', clickOut, false);
+				tl = gsap.timeline({ defaults:{ duration:0.75, ease:'power2.out' }});
+				animate();
+			}
+			
+			function animate() {
+			
+				tl.set(container, {'visibility':'visibile'})
+					.from(container, { autoAlpha:0, duration:0.5 })
+					.add('start')
+					.from('.t1', {autoAlpha:0, y:50, duration:0.5, stagger:0.15},'start')
+					.add('frame2', '+=2')
+					.from('#bg2',{ autoAlpha:0}, 'frame2')
+					.to('.t1', {autoAlpha:0, y:50, duration:0.5, ease:'power0.in'},'frame2')
+					.from('.t2', {autoAlpha:0, y:50, duration:0.5, stagger:0.25})
+					.add('end', '+=3.5')
+					.from('#bg3',{autoAlpha:0}, 'end')
+					.to('.t2', {autoAlpha:0, y:50, duration:0.5, ease:'power0.in'},'end')
+					.from('.t3', {autoAlpha:0, y:50, duration:0.5, stagger:0.15})
+					.from('#cta', {autoAlpha:0, y:10, duration:0.5})
+					.from(ctaArrow, {autoAlpha:0, x:-10, duration:0.5, ease:'back.out(5.5)'})
+					.add(arrowBounce,'+=2')
+					.call(initArrowBounce)
+					// .seek('end')
+					;
+					console.log('Animation Runtime is ' + tl.endTime());
+				// tl.pause('frame2');
+			}
+			
+			function arrowBounce(){    
+				return gsap.timeline({repeat: 1, repeatDelay: 0.04, paused:false})
+					.to(ctaArrow, { x:15, duration:.2, ease:'power2.in'})
+					.to(ctaArrow, { x:0, duration:.2, ease:'power2.out'});
+			}
+			
+			
+			function initArrowBounce(){
+				console.log('initArrowBounce');
+				clicker.addEventListener('mouseenter', arrowBounce, false);
+			}
+			
+			window.addEventListener('load', init);
+		
+		})(this,document);
+	</script>
+
+</body></html>

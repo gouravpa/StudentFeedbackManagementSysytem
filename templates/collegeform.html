@@ -1,0 +1,197 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Dashboard</title>
+    <style>
+      body{
+        background-image:url('{% static "/dashboard_img/background.jpeg" %}');
+        background-repeat : no-repeat;
+        background-size:100% 100%;
+        height:auto;
+        width:100%;
+      }
+      .mainlink{
+        
+        text-decoration:none;
+        color:white;
+        display:border-box;
+        border:1px solid black;
+        border-radius:25px;
+        padding: 20px 60px;
+        margin:0px 15px;
+        font-size:1.2rem;
+      }
+      .mainlink:hover{
+        text-decoration:none;
+        background:white;
+        color:black;
+      }
+    </style>
+  </head>
+  <body style="background-img:url('{% static "dashboard_img/background.jpeg" %}');">
+    
+    <div class="container-fluid divpr">
+        <div class="row">
+            <div class="col-lg-12">
+                <nav class="navbar navbar-expand-lg navbar-light bg-transparent font-weight-bold text-white " style="color:white;">
+                    <a class="navbar-brand" href="#" style="color:white;">FeedBackForm</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav ml-auto text-white" style="color:white;">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{% url 'profile' %}" style="color:white;">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="http://medicaps.ac.in/" style="color:white;">About Us<span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{% url 'contactus' %}" style="color:white;">Contact Us<span class="sr-only">(current)</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    {% comment %} forms for college {% endcomment %}
+    <div class="container mt-4" style="color:black;">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4">College Feedback Form</h1>
+                         {% if messages %}
+                            {% for msg in messages %}
+                                <span>{{ msg }}</span>
+                            {% endfor %}
+                        {% else %}
+                            <p class="lead">your feedback is valueable to us.</p>
+                        {% endif %}
+                        
+                        <hr class="my-4 font-weight-bold">
+                        {% comment %} form starts here {% endcomment %}
+                       
+                        <form action="{% url 'collegeform' %}" method="post">{% csrf_token %}
+                            <div style="text-align:left;">
+                            <h4 class="my-4">1. How satisfied are you with facilities provided by the college?</h4>
+                            <input name="q1" type="hidden" value="1. How satisfy are you with facilities provided by the college?">
+                            <input type="radio" name="facq1" value="Extremely Satisfied." checked><span style="padding-left:5px;">Extremely Satisfied.</span></br>
+                            <input type="radio" name="facq1" value="Very Satisfied."><span style="padding-left:5px;">Very Satisfied.</span></br>
+                            <input type="radio" name="facq1" value="Satisfied."><span style="padding-left:5px;">Satisfied.</span></br>
+
+                            <h4 class="my-4">2. Is it easy to obtain necessary resources from the college library?</h4>
+                            <input type="hidden" name="q2" value="2. IS it easy to obtain necessary resources from the college library?">
+                            <input type="radio" name="facq2" value="Yes" checked><span style="padding-left:5px;">Yes</span></br>
+                            <input type="radio" name="facq2" value="No"><span style="padding-left:5px;">No</span></br>
+                            <input type="radio" name="facq2" value="Cnt't Say"><span style="padding-left:5px;">Can't Say</span></br>
+
+                            <h4 class="my-4">3. Do you feel it is easier to register for diffrent courses within the college?</h4>
+                            <input type="hidden" name="q3" value="3. Do you feel it is easier to register for diffrent courses within the college?">
+                            <input type="radio" name="facq3" value="Extremely Satisfied." checked><span style="padding-left:5px;">Extremely Satisfied.</span></br>
+                            <input type="radio" name="facq3" value="Very Satisfied"><span style="padding-left:5px;">Very Satisfied.</span></br>
+                            <input type="radio" name="facq3" value="Satisfied"><span style="padding-left:5px;">Satisfied.</span></br>
+
+                            <h4 class="my-4">4. How Satisfied are you with cleanliness and variety of food items in the canteen?</h4>
+                            <input type="hidden" name="q4" value="4. How Satisfied are you with cleanliness and variety of food items in the canteen?" >
+                            <input type="radio" name="facq4" value="Extremely Satisfied." checked><span style="padding-left:5px;">Extremely Satisfied.</span></br>
+                            <input type="radio" name="facq4" value="Very Satisfied."><span style="padding-left:5px;">Very Satisfied.</span></br>
+                            <input type="radio" name="facq4" value="Satisfied."><span style="padding-left:5px;">Satisfied.</span></br>
+                            
+                            <h4 class="my-4">5. What do you think of the hostel?</h4>
+                            <input type="hidden" name="q5" value="5. What do you think of the hostel?">
+                            <input type="radio" name="facq5" value="Extremely Crowded." checked><span style="padding-left:5px;">Extremely Crowded.</span></br>
+                            <input type="radio" name="facq5" value="Very Crowded."><span style="padding-left:5px;">Very Crowded.</span></br>
+                            <input type="radio" name="facq5" value="Crowded."><span style="padding-left:5px;">Crowded.</span></br>
+
+                            <h4 class="my-4">6. How likely are you to continue attending this college next year?</h4>
+                            <input type="hidden" name="q6" value="6. How likely are you to continue attending this college next year?">
+                            <input type="radio" name="facq6" value="Extremely Somewhat Likely." checked><span style="padding-left:5px;">Extremely Somewhat Likely.</span></br>
+                            <input type="radio" name="facq6" value="Very Somewhat Likely."><span style="padding-left:5px;">Very Somewhat Likely.</span></br>
+                            <input type="radio" name="facq6" value="Somewhat Likely."><span style="padding-left:5px;">Somewhat Likely.</span></br>
+
+
+                            <h4 class="my-4">7. How satisfied are you with the accomodation?</h4>
+                            <input type="hidden" name="q7" value="7. How satisfied are you with the accomodation?">
+                            <input type="radio" name="facq7" value="Extremely Satisfied." checked><span style="padding-left:5px;">Extremely Satisfied.</span></br>
+                            <input type="radio" name="facq7" value="Very Satisfied."><span style="padding-left:5px;">Very Satisfied.</span></br>
+                            <input type="radio" name="facq7" value="Satisfied."><span style="padding-left:5px;">Satisfied.</span></br>
+
+
+                            <h4 class="my-4">8. Do you think your siblings or friends will be benifited by studing at this college?</h4>
+                            <input type="hidden" name="q8" value="8. Do you think your siblings or friends will be benifited by studing at this college?">
+                            <input type="radio" name="facq8" value="Yes" checked><span style="padding-left:5px;">Yes</span></br>
+                            <input type="radio" name="facq8" value="No"><span style="padding-left:5px;">No</span></br>
+                            <input type="radio" name="facq8" value="Can't Say"><span style="padding-left:5px;">Can't Say</span></br>
+
+                            <h4 class="my-4">9. How about your overall experience with this college?</h4>
+                            <input type="hidden" name="q9" value="9. How about your overall experience with this college?">
+                            <input type="radio" name="facq9" value="I don't have a job." checked><span style="padding-left:5px;">I don't have a job.</span></br>
+                            <input type="radio" name="facq9" value="Yes but, rarely."><span style="padding-left:5px;">Yes but, rarely.</span></br>
+                            <input type="radio" name="facq9" value="Yes, always."><span style="padding-left:5px;">Yes, always.</span></br>
+
+                            <h4 class="my-4">10. What do you think about extracurricular activites?</h4>
+                            <input type="hidden" name="q10" value="10. What do you think about extracurricular activites?">
+                            <input type="radio" name="facq10" value="They are to few." checked><span style="padding-left:5px;">They are to few.</span></br>
+                            <input type="radio" name="facq10" value="They are just right."><span style="padding-left:5px;">They are just right.</span></br>
+                            <input type="radio" name="facq10" value="I was overwhelmed with the number."><span style="padding-left:5px;">I was overwhelmed with the number.</span></br>
+                            
+
+                            <h4 class="my-4">11. If you had to pursue another course would you comeback to this college?</h4>
+                            
+                            <input type="hidden" name="q11" value="11. If you had to pursue another course would you comeback to this college?">
+                            <input type="radio" name="facq11" value="Yes." checked><span style="padding-left:5px;">Yes.</span></br>
+                            <input type="radio" name="facq11" value="No."><span style="padding-left:5px;">No.</span></br>
+                            
+                            <h4 class="my-4">12. Are you satisfied with the teaching staff and their teaching practices?</h4>
+                            <input type="hidden" name="q12" value="12. Are you satisfied with the teaching staff and their teaching practices?">
+                            <input type="radio" name="facq12" value="Yes." checked><span style="padding-left:5px;">Yes.</span></br>
+                            <input type="radio" name="facq12" value="No."><span style="padding-left:5px;">No.</span></br>
+
+                            <h4 class="my-4">13. Will you recommended this college to others?</h4>
+                            <input type="hidden" name="q13" value="13. Will you recommended this college to others?">
+                            <input type="radio" name="facq13" value="Yes." checked><span style="padding-left:5px;">Yes.</span></br>
+                            <input type="radio" name="facq13" value="No."><span style="padding-left:5px;">No.</span></br>
+
+                            <h4 class="my-4">14. College according to placemnent view is?</h4>
+                            <input type="hidden" name="q14" value="14. College according to placemnent view is?">
+                            <input type="radio" name="facq14" value="Good." checked><span style="padding-left:5px;">Good.</span></br>
+                            <input type="radio" name="facq14" value="Decent."><span style="padding-left:5px;">Decent.</span></br>
+                            <input type="radio" name="facq14" value="Bad."><span style="padding-left:5px;">Bad.</span></br>
+
+                            <h4 class="my-4">15. Is extra creative ideas for self inhencement are prompted?</h4>
+                            <input type="hidden" name="q15" value="15. Is extra creative ideas for self inhencement are prompted?">
+                            <input type="radio" name="facq15" value="Yes." checked><span style="padding-left:5px;">Yes.</span></br>
+                            <input type="radio" name="facq15" value="No."><span style="padding-left:5px;">No.</span></br>
+
+
+
+
+                            <div>
+                            <br><br>
+                            <button class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>

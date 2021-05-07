@@ -1,0 +1,152 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Faculty Form</title>
+    <style>
+      body{
+        background-image:url('{% static "/dashboard_img/background.jpeg" %}');
+        background-repeat : no-repeat;
+        background-size:100% 100%;
+        height:auto;
+        width:100%;
+      }
+      .mainlink{
+        
+        text-decoration:none;
+        color:white;
+        display:border-box;
+        border:1px solid black;
+        border-radius:25px;
+        padding: 20px 60px;
+        margin:0px 15px;
+        font-size:1.2rem;
+      }
+      .mainlink:hover{
+        text-decoration:none;
+        background:white;
+        color:black;
+      }
+    </style>
+  </head>
+  <body style="background-img:url('{% static "dashboard_img/background.jpeg" %}');">
+    
+    <div class="container-fluid divpr">
+        <div class="row">
+            <div class="col-lg-12">
+                <nav class="navbar navbar-expand-lg navbar-light bg-transparent font-weight-bold text-white " style="color:white;">
+                    <a class="navbar-brand" href="#" style="color:white;">FeedBackForm</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav ml-auto text-white" style="color:white;">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{% url 'profile' %}" style="color:white;">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="http://medicaps.ac.in/" style="color:white;">About Us<span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{% url 'contactus' %}" style="color:white;">Contact Us<span class="sr-only">(current)</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    {% comment %} forms for college {% endcomment %}
+    <div class="container mt-4" style="color:black;">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-lg-12 justify-content-center" style="text-align:center;">
+                                <h1 class="display-4 justify-content-center"><b>Faculty Feedback Form</b></h1>
+                            </div>
+                            <div class="col-lg-4">
+                                <h5>{{faculty.faculty_name}}</h5>
+                            </div>
+                            <div class="col-lg-4">
+                                {% if messages %}
+                                    {% for msg in messages %}
+                                        <span>{{ msg }}</span>
+                                    {% endfor %}
+                                {% else %}
+                                    <p class="lead">your feedback is valueable to us.</p>
+                                {% endif %}
+                            </div>
+                            <div class="col-lg-4">
+                                <h5 style="text-align:right!important;">{{faculty.course}}</h5>
+                            </div>
+                          </div>
+                        </div>
+                      
+                        
+                        <hr class="my-4 font-weight-bold">
+                        {% comment %} form starts here {% endcomment %}
+                       
+                        <form action="{% url 'facultyform' id %}" method="post" id="facultyform">{% csrf_token %}
+                            <div class="container-fluid" style="text-align:left;">
+                                <div class="row my-4">
+                                  {% for que in faculty.facultyquestion_set.all %}
+                                    <div class="col-lg-12">
+                                        <h4 class="my-4" >{{ forloop.counter }}. {{ que.que_text }}</h4>
+                                        <input type="hidden" class="my-4" name="q{{que.id}}" value="{{ que.que_text }}">
+                                    </div>
+                                      {% for ans in que.facultyanswer_set.all %}
+                                        <div class="col-lg-4">
+                                            <input type="radio" name="fans{{que.id}}" id="ans{{ans.id}}" value="{{ans}}" checked><span style="padding-left:5px;">{{ans.ans_text}}</span>
+                                        </div>
+                                      {% endfor %}
+                                    {% endfor %}
+                                    
+                                  </div>
+                                
+
+                            <div>
+                            <br><br>
+                            <button class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+<script>
+var x="";
+
+function myFunc(){
+
+
+        idstr = this.id.toString();
+        console.log(idstr);
+        console.log(typeof(idstr));
+
+        x = document.getElementById("ans"+idstr).value;
+        console.log(x);
+    
+     
+};
+
+</script>
+</html>
